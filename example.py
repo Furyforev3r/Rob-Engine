@@ -17,7 +17,6 @@ def main():
                 print("Hi there!")
             if input_handler.was_pressed(locals.K_a, event):
                 print("Hru?")
-                print(type(event))
             if event.type == locals.QUIT:
                 running = False
 

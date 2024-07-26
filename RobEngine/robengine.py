@@ -27,6 +27,7 @@ class RobEngine:
         """Initialize all imported modules."""
         try:
             init()
+            logger.info("All modules initialized.")
         except Exception as error:
             logger.error(f"ERROR: {error}")
 
@@ -41,5 +42,6 @@ class RobEngine:
         """Change display size."""
         try:
             self.display.set_mode(display_size)
+            logger.info("Display changed.")
         except Exception as error:
             logger.error(f"ERROR: {error}")

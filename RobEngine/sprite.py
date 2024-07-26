@@ -11,11 +11,17 @@ class Sprite:
         self.rect.left = position[0]
         self.rect.top = position[1]
 
+        logger.info("Sprite image loaded.")
+        logger.info("Sprite rect defined")
+        logger.info(f"Position set to {position}")
+
     def set_position(self, x, y):
         """Update position of the sprite."""
         try:
             self.rect.x = x
             self.rect.y = y
+            logger.info(f"Position set to [{y, x}]")
+
         except Exception as error:
             logger.error(f"ERROR: {error}")
 
@@ -23,5 +29,6 @@ class Sprite:
         """Draw the sprite on the screen."""
         try:
             screen.blit(self.image, self.rect)
+            logger.info("Drawn sprite.")
         except Exception as error:
             logger.error(f"ERROR: {error}")
