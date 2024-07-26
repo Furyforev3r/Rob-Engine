@@ -1,5 +1,6 @@
 from .robengine import RobEngine
 from .sprite import Sprite
-from .types import QUIT
+from .types import locals
+from .input import Input
 
-__all__ = ["RobEngine", "Sprite", "QUIT"]
+__all__ = ["RobEngine", "Sprite", "locals", "Input"]

@@ -3,11 +3,12 @@ from .log import logger
 
 
 class RobEngine:
-    """The game screen default class. You can initialize project, modify window details and change scenes."""
+    """The game screen default class.
+    You can initialize project, modify window details and change scenes."""
 
     def __init__(
         self,
-        display_caption: str = "Welcome to RobEngine!",
+        display_caption: str = "Welcome to Rob Engine!",
         display_size: list[int] = [1280, 720],
     ):
         self.display_caption = display_caption

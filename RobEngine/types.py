@@ -1,3 +1,3 @@
-from pygame import QUIT
+import pygame.locals as locals
 
-QUIT = QUIT
+locals = locals
