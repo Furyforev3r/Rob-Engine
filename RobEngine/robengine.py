@@ -35,6 +35,7 @@ class RobEngine:
         """Update the full display surface to the screen."""
         try:
             display.flip()
+            self.screen.fill((0, 0, 0))
         except Exception as error:
             logger.error(f"ERROR: {error}")
 

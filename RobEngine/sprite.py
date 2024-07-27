@@ -1,11 +1,12 @@
-from pygame import image, Surface
+from pygame import image, Surface, sprite
 from .log import logger
 
 
-class Sprite:
+class Sprite(sprite.Sprite):
     """The default sprite class."""
 
     def __init__(self, image_path: str, position: list[int]):
+        super().__init__()
         self.image = image.load(image_path)
         self.rect = self.image.get_rect()
         self.rect.left = position[0]
