@@ -13,7 +13,7 @@ class SpriteGroup:
         """Add a sprite to sprite group."""
         try:
             self.SpriteGroup.add(sprite)
-            logger.info("Sprite added to group.")
+            logger.info(f"{sprite} - Sprite added to group.")
 
         except Exception as error:
             logger.error(f"ERROR: {error}")

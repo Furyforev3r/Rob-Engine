@@ -12,16 +12,16 @@ class Sprite(sprite.Sprite):
         self.rect.left = position[0]
         self.rect.top = position[1]
 
-        logger.info("Sprite image loaded.")
-        logger.info("Sprite rect defined")
-        logger.info(f"Position set to {position}")
+        logger.info(f"{self} - Sprite image loaded.")
+        logger.info(f"{self} - Sprite rect defined")
+        logger.info(f"{self} - Position set to {position}")
 
     def set_position(self, x: int, y: int):
         """Update position of the sprite."""
         try:
             self.rect.x = x
             self.rect.y = y
-            logger.info(f"Position set to [{y, x}]")
+            logger.info(f"{self} - Position set to [{y, x}]")
 
         except Exception as error:
             logger.error(f"ERROR: {error}")
@@ -30,6 +30,8 @@ class Sprite(sprite.Sprite):
         try:
             self.image = transform.scale(self.image, size)
             self.rect = self.image.get_rect(topleft=self.rect.topleft)
+
+            logger.info(f"{self} was resized sucefully")
         except Exception as error:
             logger.error(f"ERROR: {error}")
 
@@ -37,6 +39,6 @@ class Sprite(sprite.Sprite):
         """Draw the sprite on the screen."""
         try:
             screen.blit(self.image, self.rect)
-            logger.info("Drawn sprite.")
+            logger.info(f"{self} - Drawn sprite.")
         except Exception as error:
             logger.error(f"ERROR: {error}")
