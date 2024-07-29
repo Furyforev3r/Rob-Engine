@@ -1,5 +1,4 @@
-from RobEngine import RobEngine, Sprite, Input, locals
-from RobEngine import SpriteGroup
+from RobEngine import RobEngine, Sprite, Input, locals, SpriteGroup, Physics
 
 
 def main():
@@ -9,13 +8,20 @@ def main():
     input_handler = Input()
 
     test_sprite = Sprite("test_sprite.jpg", [10, 10])
-    test_sprite.draw(renderer.screen)
+    test_sprite.resize((300, 300))
+
+    test_sprite_2 = Sprite("test_sprite.jpg", [1100, 600])
+    test_sprite_2.resize((100, 100))
 
     sprite_group = SpriteGroup()
 
     sprite_group.add_sprite(test_sprite)
+    sprite_group.add_sprite(test_sprite_2)
+
+    physics = Physics()
 
     running = True
+
     while running:
         for event in renderer.event.get():
             if input_handler.was_pressed(locals.K_a, event):
@@ -31,6 +37,9 @@ def main():
             test_sprite.rect.y -= 1
         if input_handler.is_pressed(locals.K_DOWN):
             test_sprite.rect.y += 1
+
+        if physics.check_collisions(test_sprite, test_sprite_2):
+            print("Collision detected!")
 
         sprite_group.update()
         sprite_group.SpriteGroup.draw(renderer.screen)
