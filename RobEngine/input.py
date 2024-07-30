@@ -35,6 +35,7 @@ class Input:
             keys: Any = self.get_pressed()
 
             if keys[key]:
+                logger.info(f"{key} is pressed!")
                 return True
 
             return False
@@ -45,6 +46,7 @@ class Input:
         """Compares whether a key was pressed."""
         try:
             if event.type == locals.KEYDOWN and event.key == key:
+                logger.info(f"{key} was pressed!")
                 return True
 
             return False
