@@ -4,6 +4,7 @@ from .types import locals
 from .input import Input
 from .spritesgroup import SpriteGroup
 from .physics import Physics
+from .text import Text
 
 __all__ = [
     "RobEngine",
@@ -13,4 +14,5 @@ __all__ = [
     "SpriteGroup",
     "Physics",
     "AnimatedSprite",
+    "Text",
 ]

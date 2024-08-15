@@ -1,9 +1,11 @@
-from RobEngine import RobEngine, Sprite, Input, locals, SpriteGroup, Physics
+from RobEngine import RobEngine, Sprite, Input, locals, SpriteGroup, Physics, Text
 
 
 def main():
     renderer = RobEngine()
     renderer.initialize()
+
+    clock = renderer.clock
 
     input_handler = Input()
 
@@ -18,12 +20,14 @@ def main():
     sprite_group.add_sprite(test_sprite_2)
 
     physics = Physics()
+    fps_text = Text(text="FPS: ...", font_size=30, color=(255, 255, 255))
 
     velocity_x = 0
     velocity_y = 0
     speed = 1
 
     running = True
+    max_fps = 1000
 
     while running:
         for event in renderer.event.get():
@@ -31,6 +35,9 @@ def main():
                 print("Hi there!")
             if event.type == locals.QUIT:
                 running = False
+
+        fps = clock.get_fps()
+        fps_text.update_text(f"FPS: {int(fps)}")
 
         velocity_x = 0
         velocity_y = 0
@@ -52,8 +59,11 @@ def main():
             test_sprite.rect.x -= velocity_x
             test_sprite.rect.y -= velocity_y
 
+        clock.tick(max_fps)
+
         sprite_group.update()
         sprite_group.SpriteGroup.draw(renderer.screen)
+        fps_text.draw(renderer.screen, (10, 10))
         renderer.update()
 
 
