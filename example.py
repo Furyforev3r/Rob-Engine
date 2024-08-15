@@ -14,11 +14,14 @@ def main():
     test_sprite_2.resize((100, 100))
 
     sprite_group = SpriteGroup()
-
     sprite_group.add_sprite(test_sprite)
     sprite_group.add_sprite(test_sprite_2)
 
     physics = Physics()
+
+    velocity_x = 0
+    velocity_y = 0
+    speed = 1
 
     running = True
 
@@ -29,17 +32,25 @@ def main():
             if event.type == locals.QUIT:
                 running = False
 
+        velocity_x = 0
+        velocity_y = 0
+
         if input_handler.is_pressed(locals.K_LEFT):
-            test_sprite.rect.x -= 1
+            velocity_x = -speed
         if input_handler.is_pressed(locals.K_RIGHT):
-            test_sprite.rect.x += 1
+            velocity_x = speed
         if input_handler.is_pressed(locals.K_UP):
-            test_sprite.rect.y -= 1
+            velocity_y = -speed
         if input_handler.is_pressed(locals.K_DOWN):
-            test_sprite.rect.y += 1
+            velocity_y = speed
+
+        test_sprite.rect.x += velocity_x
+        test_sprite.rect.y += velocity_y
 
         if physics.check_collisions(test_sprite, test_sprite_2):
             print("Collision detected!")
+            test_sprite.rect.x -= velocity_x
+            test_sprite.rect.y -= velocity_y
 
         sprite_group.update()
         sprite_group.SpriteGroup.draw(renderer.screen)
