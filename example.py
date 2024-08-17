@@ -7,7 +7,7 @@ from RobEngine import (
     Physics,
     Text,
     SolidGroup,
-    EightDirections,
+    PlatformerMovement,
 )
 
 
@@ -20,27 +20,25 @@ def main():
     input_handler = Input()
     physics = Physics()
 
-    test_sprite = Sprite("test_sprite.jpg", [10, 10])
-    test_sprite.resize((300, 300))
+    python_sprite = Sprite("python_icon.webp", [10, 10])
+    python_sprite.resize((50, 50))
 
-    test_sprite_2 = Sprite("test_sprite.jpg", [1100, 600])
-    test_sprite_2.resize((100, 100))
+    floor_sprite = Sprite("floor.jpg", [0, 650])
+    floor_sprite.resize((1000, 100))
 
     sprite_group = SpriteGroup()
     solid_group = SolidGroup()
 
-    character_moviment = EightDirections(
-        character=test_sprite,
+    character_moviment = PlatformerMovement(
+        character=python_sprite,
         input_handler=input_handler,
         physics=physics,
         solid_group=solid_group,
-        speed=1.0,
-        enabled=True,
     )
 
-    sprite_group.add_sprite(test_sprite)
-    sprite_group.add_sprite(test_sprite_2)
-    solid_group.add_sprite(test_sprite_2)
+    sprite_group.add_sprite(python_sprite)
+    sprite_group.add_sprite(floor_sprite)
+    solid_group.add_sprite(floor_sprite)
 
     fps_text = Text(text="FPS: ...", font_size=30, color=(255, 255, 255))
 

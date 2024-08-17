@@ -84,9 +84,9 @@ class PlatformerMovement:
         input_handler: Input,
         physics: Physics,
         solid_group: SolidGroup,
-        gravity: float = 0.3,
-        jump_strength: float = 10.0,
-        speed: float = 3.0,
+        gravity: float = 0.1,
+        jump_strength: float = 5.0,
+        speed: float = 1.5,
         max_fall_speed: float = 10.0,
         enabled: bool = True,
     ):
