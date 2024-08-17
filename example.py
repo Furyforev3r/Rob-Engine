@@ -1,4 +1,14 @@
-from RobEngine import RobEngine, Sprite, Input, locals, SpriteGroup, Physics, Text
+from RobEngine import (
+    RobEngine,
+    Sprite,
+    Input,
+    locals,
+    SpriteGroup,
+    Physics,
+    Text,
+    SolidGroup,
+    EightDirections,
+)
 
 
 def main():
@@ -8,6 +18,7 @@ def main():
     clock = renderer.clock
 
     input_handler = Input()
+    physics = Physics()
 
     test_sprite = Sprite("test_sprite.jpg", [10, 10])
     test_sprite.resize((300, 300))
@@ -16,15 +27,22 @@ def main():
     test_sprite_2.resize((100, 100))
 
     sprite_group = SpriteGroup()
+    solid_group = SolidGroup()
+
+    character_moviment = EightDirections(
+        character=test_sprite,
+        input_handler=input_handler,
+        physics=physics,
+        solid_group=solid_group,
+        speed=1.0,
+        enabled=True,
+    )
+
     sprite_group.add_sprite(test_sprite)
     sprite_group.add_sprite(test_sprite_2)
+    solid_group.add_sprite(test_sprite_2)
 
-    physics = Physics()
     fps_text = Text(text="FPS: ...", font_size=30, color=(255, 255, 255))
-
-    velocity_x = 0
-    velocity_y = 0
-    speed = 1
 
     running = True
     max_fps = 1000
@@ -36,28 +54,10 @@ def main():
             if event.type == locals.QUIT:
                 running = False
 
+        character_moviment.setup_moviment()
+
         fps = clock.get_fps()
         fps_text.update_text(f"FPS: {int(fps)}")
-
-        velocity_x = 0
-        velocity_y = 0
-
-        if input_handler.is_pressed(locals.K_LEFT):
-            velocity_x = -speed
-        if input_handler.is_pressed(locals.K_RIGHT):
-            velocity_x = speed
-        if input_handler.is_pressed(locals.K_UP):
-            velocity_y = -speed
-        if input_handler.is_pressed(locals.K_DOWN):
-            velocity_y = speed
-
-        test_sprite.rect.x += velocity_x
-        test_sprite.rect.y += velocity_y
-
-        if physics.check_collisions(test_sprite, test_sprite_2):
-            print("Collision detected!")
-            test_sprite.rect.x -= velocity_x
-            test_sprite.rect.y -= velocity_y
 
         clock.tick(max_fps)
 

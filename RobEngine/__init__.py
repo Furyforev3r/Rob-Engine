@@ -5,6 +5,7 @@ from .input import Input
 from .spritesgroup import SpriteGroup
 from .physics import Physics
 from .text import Text
+from .behaviors import SolidGroup, EightDirections
 
 __all__ = [
     "RobEngine",
@@ -15,4 +16,6 @@ __all__ = [
     "Physics",
     "AnimatedSprite",
     "Text",
+    "SolidGroup",
+    "EightDirections",
 ]
