@@ -1,3 +1,4 @@
+import math
 from .sprite import Sprite
 from .log import logger
 from .input import Input
@@ -161,3 +162,44 @@ class PlatformerMovement:
 
         except Exception as error:
             logger.error(f"ERROR: {error}")
+
+
+class Bullet:
+    def __init__(
+        self,
+        sprite: Sprite,
+        angle: float,
+        speed: float,
+        physics: Physics,
+        solid_group: SolidGroup,
+    ):
+        self.sprite = sprite
+        self.angle = angle
+        self.speed = speed
+        self.physics = physics
+        self.solid_group = solid_group
+        self.active = True
+
+        logger.info(
+            f"Bullet created at position ({sprite.rect.x}, {sprite.rect.y}) with angle {angle} degrees and speed {speed}."
+        )
+
+    def update(self):
+        if self.active:
+            direction_x = math.cos(math.radians(self.angle))
+            direction_y = math.sin(math.radians(self.angle))
+            self.sprite.rect.x += direction_x * self.speed
+            self.sprite.rect.y += direction_y * self.speed
+
+            for solid_sprite in self.solid_group.group:
+                if self.physics.check_collisions(self.sprite, solid_sprite):
+                    self.active = False
+                    logger.info(
+                        f"Bullet collided with {solid_sprite} at ({self.sprite.rect.x}, {self.sprite.rect.y})."
+                    )
+                    break
+
+    def change_angle(self, angle_degrees: float):
+        """Change the bullet's angle by a specific amount in degrees."""
+        self.angle += angle_degrees
+        logger.info(f"Bullet angle changed to {self.angle} degrees.")
