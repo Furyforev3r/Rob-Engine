@@ -38,6 +38,9 @@ class EightDirections:
         self.velocity_x = 0
         self.velocity_y = 0
         self.enabled = enabled
+        self.position_x = character.rect.x
+        self.position_y = character.rect.y
+        
         logger.info(f"{character} - 8 directions was assigned to the character.")
 
     def set_enabled(self, enabled: bool):
@@ -63,8 +66,10 @@ class EightDirections:
                 if self.input_handler.is_pressed(locals.K_DOWN):
                     self.velocity_y = self.speed
 
-                self.character.rect.x += self.velocity_x
-                self.character.rect.y += self.velocity_y
+                self.position_x += self.velocity_x
+                self.position_y += self.velocity_y
+                self.character.rect.x = int(self.position_x)
+                self.character.rect.y = int(self.position_y)
 
                 for solid_sprite in self.solid_group.group:
                     if self.physics.check_collisions(self.character, solid_sprite):
@@ -103,6 +108,7 @@ class PlatformerMovement:
         self.velocity_y = 0
         self.enabled = enabled
         self.on_ground = False
+        
         logger.info(f"{character} - Platformer movement was assigned to the character.")
 
     def set_enabled(self, enabled: bool):

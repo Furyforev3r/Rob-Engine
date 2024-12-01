@@ -7,12 +7,12 @@ from RobEngine import (
     Physics,
     Text,
     SolidGroup,
-    PlatformerMovement,
+    EightDirections,
 )
 
 
 def main():
-    renderer = RobEngine()
+    renderer = RobEngine(display_size=[640, 480])
     renderer.initialize()
 
     clock = renderer.clock
@@ -21,25 +21,21 @@ def main():
     physics = Physics()
 
     python_sprite = Sprite("python_icon.webp", [10, 10])
-    python_sprite.resize((50, 50))
-
-    floor_sprite = Sprite("floor.jpg", [0, 650])
-    floor_sprite.resize((1000, 100))
+    python_sprite.resize((30, 30))
 
     sprite_group = SpriteGroup()
     solid_group = SolidGroup()
 
-    character_moviment = PlatformerMovement(
+    character_moviment = EightDirections(
         character=python_sprite,
         input_handler=input_handler,
         physics=physics,
         solid_group=solid_group,
+        speed=0.4
     )
 
     sprite_group.add_sprite(python_sprite)
-    sprite_group.add_sprite(floor_sprite)
-    solid_group.add_sprite(floor_sprite)
-
+    
     fps_text = Text(text="FPS: ...", font_size=30, color=(255, 255, 255))
 
     running = True
@@ -62,7 +58,7 @@ def main():
         sprite_group.update()
         sprite_group.SpriteGroup.draw(renderer.screen)
         fps_text.draw(renderer.screen, (10, 10))
-        renderer.update()
+        renderer.update(background_color=(0, 168, 26))
 
 
 if __name__ == "__main__":

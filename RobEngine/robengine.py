@@ -9,7 +9,7 @@ class RobEngine:
     def __init__(
         self,
         display_caption: str = "Welcome to Rob Engine!",
-        display_size: list[int] = [1280, 720],
+        display_size: list[int] = [1280, 720]
     ):
         self.display_caption = display_caption
         self.display_size = display_size
@@ -31,11 +31,11 @@ class RobEngine:
         except Exception as error:
             logger.error(f"ERROR: {error}")
 
-    def update(self):
+    def update(self, background_color: tuple[int, int, int,] = (0, 0, 0)):
         """Update the full display surface to the screen."""
         try:
             display.flip()
-            self.screen.fill((0, 0, 0))
+            self.screen.fill(background_color)
         except Exception as error:
             logger.error(f"ERROR: {error}")
 
